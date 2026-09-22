@@ -108,6 +108,6 @@ Follow the step-by-step workflow in `docs/axis-addition-workflow.md` exactly —
 - Axis IDs follow `low_pole_high_pole` naming convention (e.g. `things_people`, `master_create`)
 - All axis IDs in `categories.yaml` must match `dimensions.yaml` exactly
 - Conditional axes are scored in `categories.yaml` for all categories — the activation condition controls probing during sessions, not scoring
-- Non-triggering categories should score `animals_people: 5` (neutral) — see [issue #5](https://github.com/BoniniTech/career-assessment/issues/5)
+- Non-triggering categories should score `animals_people: 5` (neutral) — see [issue #2](https://github.com/BoniniTech/career-assessment/issues/2)
 - `dominant: true` axes (`things_people`, `nurturing`) get guaranteed Tier 1 placement and firm `min_questions` minimums
 - Do not add features or axes without running the analytics skill and validation sessions first
