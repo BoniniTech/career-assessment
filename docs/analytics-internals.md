@@ -35,7 +35,7 @@ Each axis seed maps to a noise level automatically based on its distance from th
 - Seed **<= 2 or >= 8** (strong, outside neutral band): sigma = `sigma.primary` (default 1.5) — tighter noise, the axis defines the archetype
 - Seed **3–7** (moderate or neutral): sigma = `sigma.secondary` (default 2.5) — wider noise, the axis is open in this archetype
 
-Both sigma values are stored in `live/archetypes.yaml` and can be adjusted there. Tightening primary sigma makes archetypes more "pure" — generated profiles cluster closer to the seed. Widening secondary sigma allows more variation on the axes an archetype doesn't strongly define.
+Both sigma values are stored in `analytics/archetypes.yaml` and can be adjusted there. Tightening primary sigma makes archetypes more "pure" — generated profiles cluster closer to the seed. Widening secondary sigma allows more variation on the axes an archetype doesn't strongly define.
 
 The original skill had a hand-maintained "primary *" column per archetype. The auto-derivation rule replaces it: seed extremity IS the primary designation.
 
@@ -208,7 +208,7 @@ Archetypes are meant to model realistic person-types, not just axis-space extrem
 Archetype seeds for **conditional axes** should be set consistently with the activation condition. For example, if `concrete_abstract` only activates when `analyze >= 6 OR master_create >= 7`, an archetype with `analyze: 3` and `master_create: 4` will almost never activate `concrete_abstract` — so its seed value is irrelevant in practice. Set it to 5 (neutral) to signal intent.
 
 When adding a new axis to `dimensions.yaml`:
-1. Add a seed to every archetype in `live/archetypes.yaml`
+1. Add a seed to every archetype in `analytics/archetypes.yaml`
 2. For archetypes where the new axis is not conceptually defining, use a neutral seed (5)
 3. For archetypes where the new axis matters, choose a seed that reflects the archetype's persona
 4. Run `python scripts/analytics.py run 100` and verify per-archetype top categories still look right

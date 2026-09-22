@@ -3,7 +3,7 @@
 Usage:
   python validate_yaml.py dimensions   — validate live/dimensions.yaml structure
   python validate_yaml.py categories   — validate live/categories.yaml against dimensions.yaml
-  python validate_yaml.py archetypes   — validate live/archetypes.yaml against dimensions.yaml
+  python validate_yaml.py archetypes   — validate analytics/archetypes.yaml against dimensions.yaml
 """
 
 import sys

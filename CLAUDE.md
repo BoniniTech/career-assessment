@@ -49,11 +49,11 @@ python scripts/recalc.py --report  # also print full discrimination table
 
 ## Analytics
 
-`scripts/analytics.py` generates synthetic profiles from `live/archetypes.yaml`, scores them
+`scripts/analytics.py` generates synthetic profiles from `analytics/archetypes.yaml`, scores them
 against `live/categories.yaml`, and reports on axis weakness and category coverage. The log
 is written to `analytics/log.json` (gitignored — local only). All axis, category, and
 activation-condition data is read live from YAML; no changes to the script are needed when
-adding axes or categories (only `live/archetypes.yaml` seeds need updating).
+adding axes or categories (only `analytics/archetypes.yaml` seeds need updating).
 
 ```
 python scripts/analytics.py                          # status: record count + top weak axes
@@ -63,7 +63,7 @@ python scripts/analytics.py run <n> --archetype <id> # restrict to one archetype
 python scripts/analytics.py review                   # aggregate stats across full log
 ```
 
-**When adding a new axis:** add a seed value for it to every archetype in `live/archetypes.yaml`.
+**When adding a new axis:** add a seed value for it to every archetype in `analytics/archetypes.yaml`.
 The script errors at startup if any archetype is missing a seed for a defined axis.
 
 **When adding a new category:** no changes needed — the script picks it up automatically from `live/categories.yaml`.
