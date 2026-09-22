@@ -99,6 +99,7 @@ Follow the step-by-step workflow in `docs/axis-addition-workflow.md` exactly —
 - Every completed task: commit → push → `gh pr create` — all steps automatically, no need to ask
 - PR body: `## Summary` bullets + `## Test plan` checklist + `Closes #NN` footer; no "Generated with Claude Code" line
 - Auto-assignee is handled by a GitHub Action — no `--assignee` flag needed
+- `main` is protected by a ruleset: no direct pushes, force-pushes, or deletion, and PRs need a code-owner approval. Only the org admin can bypass, and only through a PR (`gh pr merge --admin`). Merge only when Victor says to
 - Use `--template <filename>` from `.github/ISSUE_TEMPLATE/` when filing issues (`bug.md`, `qa.md`, `feature.md`, `enhancement.md`)
 
 ---
