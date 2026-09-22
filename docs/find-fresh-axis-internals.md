@@ -60,7 +60,7 @@ Before looking for a new axis, the skill checks whether the closeness is an arte
 - A score was carried over from an earlier version of the axis definition that has since been refined
 - A category was scored before a related axis existed and was never revisited
 
-The misalignment check is the more conservative diagnosis. A score correction is lower-cost than a new axis — it requires only editing `live/categories.yaml` rather than touching `live/dimensions.yaml`, `live/career-assessment.md`, `live/archetypes.yaml`, and all categories.
+The misalignment check is the more conservative diagnosis. A score correction is lower-cost than a new axis — it requires only editing `live/categories.yaml` rather than touching `live/dimensions.yaml`, `live/career-assessment.md`, `analytics/archetypes.yaml`, and all categories.
 
 **Output:** for each suspected misalignment, the skill states the current score, the proposed correction, and whether the fix alone would meaningfully separate the pair. The facilitator decides whether to accept the correction before Prong 2 is attempted.
 
@@ -122,4 +122,4 @@ The pre-flight analytics step (`python scripts/analytics.py review`) is optional
 
 If the facilitator approves a score correction from Prong 1, that is executed directly in `live/categories.yaml`. Run `python scripts/validate_yaml.py categories` after editing.
 
-If the facilitator approves a new axis from Prong 2, the full addition is executed via `docs/axis-addition-workflow.md`. That workflow covers all files that need updating (`live/dimensions.yaml`, `live/categories.yaml`, `live/career-assessment.md`, `live/archetypes.yaml`) and the validation test sessions required before the axis is considered stable. The skill itself does not write to any file.
+If the facilitator approves a new axis from Prong 2, the full addition is executed via `docs/axis-addition-workflow.md`. That workflow covers all files that need updating (`live/dimensions.yaml`, `live/categories.yaml`, `live/career-assessment.md`, `analytics/archetypes.yaml`) and the validation test sessions required before the axis is considered stable. The skill itself does not write to any file.
