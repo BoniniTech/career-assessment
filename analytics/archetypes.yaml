@@ -1,0 +1,149 @@
+version: "1.0"
+description: >
+  Archetype seeds for the career assessment analytics tool.
+  Each archetype defines seed values for every axis in dimensions.yaml.
+
+  σ (noise) is derived automatically from each seed value — no separate designation needed:
+    primary  σ = 1.5  applied when seed ≤ 2 or ≥ 8 (strong signal outside the neutral band)
+    secondary σ = 2.5  applied for all other seeds (moderate or neutral signal)
+
+  When a new axis is added to dimensions.yaml, add a seed value for that axis to every
+  archetype here. The analytics script will error at startup if any archetype is incomplete.
+
+  When adding a new archetype, define seed values for all axes. The description should name
+  a realistic person-type so the archetype maps to intuitively expected career categories —
+  run `python scripts/analytics.py run 50 --archetype <id>` after adding to verify.
+
+sigma:
+  primary: 1.5
+  secondary: 2.5
+
+archetypes:
+
+  - id: analytical_indoor
+    description: >
+      The researcher, scientist, mathematician. Strong analytical drive, abstract thinking,
+      works alone, indoors, informs rather than expresses.
+    seeds:
+      things_people: 2
+      master_create: 4
+      analyze: 9
+      flexible_structured: 7
+      nurturing: 3
+      solo_group: 3
+      indoors_outdoors: 2
+      inform_express: 2
+      concrete_abstract: 8
+      animals_people: 5
+
+  - id: creative_expressive
+    description: >
+      The artist, designer, writer. Strong creative drive, expressive, flexible, works solo
+      or in small groups, indoor studio environment.
+    seeds:
+      things_people: 4
+      master_create: 9
+      analyze: 3
+      flexible_structured: 3
+      nurturing: 4
+      solo_group: 3
+      indoors_outdoors: 3
+      inform_express: 9
+      concrete_abstract: 5
+      animals_people: 5
+
+  - id: care_dominant
+    description: >
+      The nurse, social worker, counsellor. Strong caring and people drive, team-oriented,
+      indoors, informs, people over animals.
+    seeds:
+      things_people: 8
+      master_create: 3
+      analyze: 5
+      flexible_structured: 6
+      nurturing: 9
+      solo_group: 6
+      indoors_outdoors: 2
+      inform_express: 3
+      concrete_abstract: 4
+      animals_people: 8
+
+  - id: practical_outdoor
+    description: >
+      The ecologist, ranger, outdoor instructor. Outdoors, concrete, things-oriented,
+      moderate caring drive, flexible, solo or small team.
+    seeds:
+      things_people: 3
+      master_create: 4
+      analyze: 6
+      flexible_structured: 4
+      nurturing: 5
+      solo_group: 4
+      indoors_outdoors: 8
+      inform_express: 3
+      concrete_abstract: 3
+      animals_people: 4
+
+  - id: builder_engineer
+    description: >
+      The engineer, software developer, architect. Makes new things, analytical, structured,
+      indoors, things-oriented, team or solo depending on subdiscipline.
+    seeds:
+      things_people: 2
+      master_create: 7
+      analyze: 7
+      flexible_structured: 7
+      nurturing: 3
+      solo_group: 5
+      indoors_outdoors: 2
+      inform_express: 3
+      concrete_abstract: 6
+      animals_people: 5
+
+  - id: people_leader
+    description: >
+      The entrepreneur, manager, sales lead, recruiter. People-facing, team-oriented,
+      moderate create drive, flexible, indoors, mix of express and inform.
+    seeds:
+      things_people: 8
+      master_create: 6
+      analyze: 5
+      flexible_structured: 5
+      nurturing: 5
+      solo_group: 8
+      indoors_outdoors: 2
+      inform_express: 6
+      concrete_abstract: 5
+      animals_people: 7
+
+  - id: master_craftsperson
+    description: >
+      The skilled tradesperson, clinical practitioner, specialist. Deep mastery drive,
+      concrete, structured, low create, moderate caring, variable on people/things.
+    seeds:
+      things_people: 5
+      master_create: 2
+      analyze: 5
+      flexible_structured: 7
+      nurturing: 6
+      solo_group: 4
+      indoors_outdoors: 3
+      inform_express: 3
+      concrete_abstract: 3
+      animals_people: 6
+
+  - id: analytical_helper
+    description: >
+      The doctor, researcher, lawyer, policy analyst. High analysis, high nurturing or people
+      drive, structured, indoors, informs. Straddles science and care.
+    seeds:
+      things_people: 6
+      master_create: 4
+      analyze: 8
+      flexible_structured: 7
+      nurturing: 7
+      solo_group: 5
+      indoors_outdoors: 2
+      inform_express: 3
+      concrete_abstract: 6
+      animals_people: 7

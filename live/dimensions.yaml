@@ -1,0 +1,376 @@
+description: >
+  Dimension model for career matching assessment.
+  This file is the reference contract for both categories.yaml and questions.yaml.
+  All category tags and question mappings must use these axis IDs and score ranges exactly.
+
+  Axis types:
+    bipolar   — two opposing poles with a meaningful midpoint (4–6 = neutral)
+    unipolar  — one meaningful pole; low end is absence of signal, not a negative trait
+    conditional — only activated and probed when upstream signal meets the defined
+                  activation condition; scored in categories.yaml as normal, but
+                  skipped entirely during a session when the condition is not met
+
+  Fields added in v1.2:
+    theme_hint          — optional; axis-specific suggested themes for playful/themed
+                          questions in career-assessment sessions. Consumed by the
+                          career-assessment skill to guide profile-matched theme selection.
+                          `high` applies when the axis resolves strongly high; `low` when
+                          strongly low. null means no theme implication for that pole.
+                          Axes with no clear theme implication omit this field entirely.
+    question_design_note — optional; axis-specific constraints on question framing, beyond
+                          the universal bad-question rules. Present only for axes with known
+                          design pitfalls. Treated as an additional hard constraint by the
+                          career-assessment skill when generating questions for that axis.
+
+  Fields added in v1.3:
+    priority            — integer; session probing order, 1 = probe first. Drives
+                          Tier 1 / Tier 2 / Tier 3 ordering in the career-assessment skill.
+                          For conditional axes, priority refers to position within the active
+                          sequence once the activation condition is met — not absolute session
+                          position. The career-assessment skill probes axes in ascending
+                          priority order. Updated by the recalc skill after each recalc run.
+    min_questions       — integer; minimum confirmed (non-C) answers required before this
+                          axis can be treated as resolved. The early-exit rule for unipolar
+                          axes can override this downward only if its conditions are met.
+    dominant            — optional boolean; marks axes that warrant a soft minimum question
+                          count and guaranteed Tier 1 placement regardless of computed metrics.
+                          Omit (or false) for non-dominant axes. Set manually after reviewing
+                          a recalc report. The recalc skill flags axes that cross the dominant
+                          thresholds (stdev >= 2.2 AND pair sep >= 25%) but lack this field.
+                          Currently dominant: things_people, nurturing.
+
+axes:
+
+  - id: things_people
+    number: 1
+    name: "People ↔ Things"
+    type: bipolar
+    score_range: [0, 10]
+    dominant: true
+    priority: 1
+    min_questions: 2
+    low_pole:
+      label: "Things"
+      description: "Prefers working with objects, machines, or systems"
+    high_pole:
+      label: "People"
+      description: "Prefers working with people, groups, and relationships"
+    notes: >
+      A score of 5 indicates comfort with both. Scores below 5 lean toward
+      things/systems; scores above 5 lean toward people/relationships.
+    theme_hint:
+      high: "team adventures, community scenarios"
+      low: "engineering fantasy, robots, gadgets"
+
+  - id: master_create
+    number: 2
+    name: "Create ↔ Master"
+    type: bipolar
+    score_range: [0, 10]
+    priority: 4
+    min_questions: 2
+    low_pole:
+      label: "Master"
+      description: "Driven to perfect, refine, and deeply master existing things"
+    high_pole:
+      label: "Create"
+      description: "Driven to invent, originate, and make things that did not exist before"
+    notes: >
+      Replaces the former unipolar Create axis. Scores below 3 indicate a strong
+      drive to master existing skills, knowledge, or crafts. Scores above 7 indicate
+      a strong drive to invent or originate. Scores of 4–6 indicate comfort with both.
+      A person can score high on both Create and Analyze — these are independent axes.
+      Master-leaning profiles amplify careers in skilled trades, clinical medicine,
+      performance, academic scholarship, and technical roles where deep expertise matters.
+      Create-leaning profiles amplify careers in design, art, engineering, entrepreneurship,
+      writing, and any field where making something new is central.
+    theme_hint:
+      high: "fantasy, invention, magic, art world"
+      low: null
+    question_design_note: >
+      Questions must contrast making something new that did not exist before against
+      perfecting or deeply mastering something that already exists. Avoid performance,
+      expressing, or social scenarios — these bleed into inform_express and things_people.
+      When using a fictional or playful frame, ensure the fictional roles are neutral on
+      the master/create axis and the choice itself carries the signal — a wizard who
+      invents new spells is a create scenario regardless of what option B says.
+
+  - id: analyze
+    number: 3
+    name: "Analyze"
+    type: unipolar
+    score_range: [0, 10]
+    priority: 3
+    min_questions: 2
+    low_pole:
+      label: "Low"
+      description: "Little drive to examine, dissect, or figure out how things work"
+    high_pole:
+      label: "High"
+      description: "Strong drive to examine, understand, and figure out how things work"
+    notes: >
+      Independent of Create ↔ Master. A person can score high on both.
+      High scores amplify careers in research, science, medicine, law,
+      or any field where deep understanding is central.
+      Low scores are not a negative trait — just low signal on this dimension.
+    theme_hint:
+      high: "sci-fi, mystery, detective, space exploration"
+      low: null
+    question_design_note: >
+      Questions must probe the drive to understand why or how things work — not
+      the preference for deep expertise (which is master_create) or for physical
+      vs. conceptual problems (which is concrete_abstract). A valid analyze question
+      contrasts investigating/figuring-out against doing/using without investigation.
+      Avoid scenarios where one option sounds more intelligent than the other — both
+      options must feel equally valid and appealing. Avoid "figuring out how something
+      works" scenarios where the object is physical and hands-on, as these can
+      simultaneously probe concrete_abstract.
+
+  - id: flexible_structured
+    number: 4
+    name: "Structured ↔ Flexible"
+    type: bipolar
+    score_range: [0, 10]
+    priority: 7
+    min_questions: 1
+    low_pole:
+      label: "Flexible"
+      description: "Prefers open-ended, exploratory work where the problems are not predefined and the field changes rapidly"
+    high_pole:
+      label: "Structured"
+      description: "Prefers routine, rules, clear processes, and predictability — work where the correct answer exists and the job is to reach it"
+    notes: >
+      Score of 5 indicates adaptability to both environments.
+      Not a measure of ability — purely preference.
+      This axis captures two reinforcing dimensions that tend to travel together:
+      (1) working-environment regularity — does the work follow a repeatable cycle
+      (calendar-driven closes, standardised audits, defined filing periods)?
+      (2) problem openness — is the goal to verify correctness against a known standard,
+      or to discover something that was not previously known?
+      Structured-leaning work (scores 7–10) tends to score high on both: regular process
+      cycles AND epistemically closed problems with verifiable correct answers.
+      Flexible-leaning work (scores 0–3) tends to score low on both: irregular rhythms
+      AND open-ended problems where discovery or interpretation is the goal.
+      Midpoint scores (4–6) arise when a field has one dimension but not the other —
+      e.g. a research lab with strict protocols (structured environment) but open
+      scientific questions (flexible problem space) scores around 5.
+      Score categories carefully against both dimensions, not just environmental regularity.
+    question_design_note: >
+      This axis captures two reinforcing dimensions: environment regularity (does the
+      work follow a repeatable cycle?) and problem openness (is there a known correct
+      answer, or is the goal discovery?). Questions must reflect both — do not probe
+      only routine vs. variety, as this captures the surface dimension but misses the
+      epistemic one. A question contrasting "same thing every day" against "something
+      different every day" measures environment regularity alone and is insufficient.
+      A stronger question contrasts following a known process to reach a correct answer
+      against exploring an open problem where the answer is not yet known.
+      Avoid scenarios where structured = indoors and flexible = outdoors — this bleeds
+      into indoors_outdoors. Avoid scenarios where structured = working alone and
+      flexible = working in a chaotic team — this bleeds into solo_group.
+
+  - id: nurturing
+    number: 5
+    name: "Nurturing"
+    type: unipolar
+    score_range: [0, 10]
+    dominant: true
+    priority: 2
+    min_questions: 3
+    low_pole:
+      label: "Low"
+      description: "Low drive to nurture or actively improve the wellbeing of others"
+    high_pole:
+      label: "High"
+      description: "Strong drive to nurture — to actively care for and improve the wellbeing of people, animals, or communities"
+    notes: >
+      Unipolar — a low score is not a negative trait, just low signal.
+      High scores amplify careers in medicine, teaching, social work,
+      veterinary, counseling, and community service.
+      Does not replace the People ↔ Things axis; the two interact.
+      Example: A person can score low People (prefers things) but high Nurturing
+      (wants to care for animals) — pointing toward veterinary or wildlife conservation.
+      Nurturing implies active, other-directed care for an individual (person, animal,
+      student) — not a general concern for systems or the environment. An ecologist
+      cares about ecosystems; a vet nurtures individual animals. The distinction
+      matters for separating ecology_conservation (scored neutral) from
+      veterinary_animal_care (scored high).
+      min_questions is 3 (not 2 like other dominant axes): this axis is asked early
+      when profile context is thin, and sits at the critical care/non-care boundary.
+      A third question meaningfully reduces misclassification risk for profiles that
+      mix high animal preference with moderate general caring drive.
+    theme_hint:
+      high: "animals, nature, whimsical community settings"
+      low: null
+    question_design_note: >
+      At least one nurturing question per session must use a non-animal caring scenario
+      (e.g. helping a person, a community, or the environment). This prevents a person
+      who strongly prefers animals from inflating their nurturing score when their general
+      caring drive may be lower. The early-exit rule (score ≥8 on two consecutive answers)
+      cannot trigger until at least one non-animal nurturing question has been answered.
+
+  - id: solo_group
+    number: 6
+    name: "Solo ↔ Group"
+    type: bipolar
+    score_range: [0, 10]
+    priority: 8
+    min_questions: 1
+    low_pole:
+      label: "Solo"
+      description: "Strongly prefers working alone or independently"
+    high_pole:
+      label: "Group"
+      description: "Strongly prefers working with teams, collaborators, or groups"
+    notes: >
+      Distinct from People ↔ Things. A person can prefer working with things
+      but still prefer doing so in a team environment (e.g. a factory floor worker),
+      or prefer working with people but independently (e.g. a solo therapist).
+      Score of 5 indicates comfort with both. Not a measure of social skill —
+      purely a working-environment preference.
+    question_design_note: >
+      Avoid scenarios where solo work is also things-oriented and group work is also
+      people-oriented — this conflates solo_group with things_people. A valid question
+      should be neutral on things_people: both options involve the same type of subject
+      matter (e.g. both involve building something, or both involve helping people),
+      and the only contrast is whether the person works alone or with others.
+      Similarly, avoid scenarios where solo = quiet indoors and group = busy outdoors,
+      as this bleeds into indoors_outdoors.
+
+  - id: indoors_outdoors
+    number: 7
+    name: "Indoors ↔ Outdoors"
+    type: bipolar
+    score_range: [0, 10]
+    priority: 5
+    min_questions: 1
+    low_pole:
+      label: "Indoors"
+      description: "Strongly prefers indoor working environments — offices, labs, studios, clinics"
+    high_pole:
+      label: "Outdoors"
+      description: "Strongly prefers outdoor working environments — field, nature, construction, open spaces"
+    notes: >
+      Score of 5 indicates comfort with both environments.
+      Not a measure of physical capability — purely preference.
+      Interacts with concrete_abstract (conditional): outdoor roles tend to be more
+      concrete; indoor roles span the full abstract–concrete range.
+    theme_hint:
+      high: "wilderness, adventure, nature exploration"
+      low: null
+
+  - id: inform_express
+    number: 8
+    name: "Express ↔ Inform"
+    type: bipolar
+    score_range: [0, 10]
+    priority: 6
+    min_questions: 1
+    low_pole:
+      label: "Inform"
+      description: "Driven to communicate facts, knowledge, or analysis clearly to others"
+    high_pole:
+      label: "Express"
+      description: "Driven to express personal vision, emotion, or original ideas"
+    notes: >
+      Applies broadly — not limited to high-create profiles. A wiki writer, technical
+      author, or open-source developer may score high Master and high Inform without
+      any creative drive. A fine artist or musician may score high Create and high
+      Express. A journalist sits near the midpoint — informing through a personal lens.
+      Score of 5 indicates comfort with or motivation for both modes.
+      Interacts with master_create but is independent of it.
+    question_design_note: >
+      Keep master_create constant across both options — the contrast must be between
+      communicating personal vision/emotion and communicating facts/knowledge, not
+      between making something new and applying existing knowledge. A scenario that
+      pairs "create an original artwork" against "write a factual report" is
+      simultaneously probing master_create and inform_express and should not be used
+      as a single-axis question for either. Both options should involve a similar level
+      of originality; the axis signal comes from the mode of communication, not the
+      degree of invention. Avoid scenarios where express = performing for a large
+      audience and inform = working alone, as this bleeds into solo_group and
+      things_people.
+
+  - id: concrete_abstract
+    number: 9
+    name: "Abstract ↔ Concrete"
+    type: bipolar
+    score_range: [0, 10]
+    priority: 10
+    min_questions: 1
+    low_pole:
+      label: "Concrete"
+      description: "Prefers tangible, hands-on, physical work with real objects"
+    high_pole:
+      label: "Abstract"
+      description: "Prefers ideas, concepts, theory, and symbolic reasoning"
+    notes: >
+      Conditional axis — only probed when analyze >= 6 OR master_create >= 7.
+      Skipped entirely for profiles that do not meet the activation condition,
+      as the distinction adds little discrimination value for pure care or
+      people-facing profiles where both ends of this axis are underrepresented.
+      Useful for separating careers that look similar on other axes.
+      Example: a Carpenter and a Mathematician may both score low People and high
+      Analyze, but split sharply here. Score of 5 indicates comfort with both modes.
+      priority refers to position within the active sequence once the activation
+      condition is met — not absolute session position.
+    activation:
+      condition: "analyze >= 6 OR master_create >= 7"
+      rationale: >
+        For profiles low on both analyze and master_create, the abstract/concrete
+        distinction rarely separates the top career matches — care, people, and
+        environment preferences dominate. Probing this axis for those profiles
+        costs question budget without improving output quality.
+    question_design_note: >
+      Both options must be neutral on indoors_outdoors and flexible_structured.
+      Avoid scenarios where concrete = outdoors and abstract = indoors, as this
+      conflates the axis with indoors_outdoors. Avoid scenarios where hands-on
+      work implies unpredictability and theoretical work implies routine, as this
+      bleeds into flexible_structured. The contrast must be purely about whether
+      the person prefers working with physical objects and materials or with ideas,
+      models, and symbolic reasoning. Because this axis only activates for analytical
+      or create-leaning profiles, both options can assume a degree of intellectual
+      engagement — the question does not need to be simplified to a basic physical task.
+
+  - id: animals_people
+    number: 10
+    name: "People ↔ Animals"
+    type: bipolar
+    score_range: [0, 10]
+    priority: 9
+    min_questions: 1
+    low_pole:
+      label: "Animals"
+      description: "Prefers working with or caring for animals over people"
+    high_pole:
+      label: "People"
+      description: "Prefers working with or caring for people over animals"
+    notes: >
+      Conditional axis — only probed when nurturing >= 7 OR things_people >= 7.
+      Skipped entirely for profiles that do not meet the activation condition,
+      as it is noise for low-nurturing or things-oriented profiles.
+      Separates veterinary/wildlife careers from social/medical/teaching careers
+      for profiles where nurturing or people drive is high. Score of 5 indicates
+      equal comfort with or motivation by both.
+      priority refers to position within the active sequence once the activation
+      condition is met — not absolute session position.
+    activation:
+      condition: "nurturing >= 7 OR things_people >= 7"
+      rationale: >
+        For profiles with low nurturing and low things_people, the distinction
+        between working with people vs. animals is irrelevant — neither is a strong
+        motivator. Probing this axis for those profiles produces noise.
+
+scoring:
+  bipolar_midpoint: 5
+  bipolar_neutral_band: [4, 6]
+  unipolar_threshold_low: 3
+  unipolar_threshold_high: 7
+  notes: >
+    For bipolar axes, scores within the neutral band (4–6) are treated as
+    weak signal and do not strongly filter careers in either direction.
+    For unipolar axes, scores below threshold_low are treated as weak signal,
+    scores above threshold_high are treated as strong signal.
+    Conditional axes follow the same scoring rules as their base type (bipolar
+    or unipolar) but are only activated during a session when their upstream
+    condition is met. All categories are scored against all axes regardless
+    of conditionality.

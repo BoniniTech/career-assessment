@@ -1,0 +1,44 @@
+name: Validate YAML
+
+on:
+  push:
+    paths:
+      - 'live/dimensions.yaml'
+      - 'live/categories.yaml'
+      - 'analytics/archetypes.yaml'
+      - 'scripts/validate_yaml.py'
+      - '.github/workflows/validate-yaml.yml'
+
+jobs:
+  validate-dimensions:
+    name: Validate dimensions.yaml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pyyaml
+      - run: python scripts/validate_yaml.py dimensions
+
+  validate-categories:
+    name: Validate categories.yaml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pyyaml
+      - run: python scripts/validate_yaml.py categories
+
+  validate-archetypes:
+    name: Validate archetypes.yaml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pyyaml
+      - run: python scripts/validate_yaml.py archetypes

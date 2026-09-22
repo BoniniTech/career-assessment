@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtualenvs
+.venv/
+venv/
+
+# macOS
+.DS_Store
+
+# Analytics log — local only, not committed
+analytics/log.json
+
+# Claude Code local settings and worktrees
+.claude/

@@ -1,0 +1,659 @@
+description: >
+  Career category taxonomy for the career matching assessment.
+  Each category is tagged against the 10 axes defined in dimensions.yaml.
+  Scores must use the axis IDs and score ranges defined in dimensions.yaml exactly.
+  At output time, Claude uses role_hint to generate 4-6 illustrative job title examples
+  within each matched category.
+
+categories:
+
+  # ── Sciences ────────────────────────────────────────────────────────────────
+
+  - id: biological_sciences
+    name: "Biological Sciences"
+    description: >
+      People in this field study living things — from tiny cells to entire ecosystems.
+      The work is mostly analytical and investigative, often conducted in labs or in the field.
+      It suits people who are curious about how life works and enjoy careful, methodical research.
+    role_hint: "Field and laboratory roles studying living organisms, ecosystems, and biological systems"
+    axes:
+      things_people: 3
+      master_create: 4       # some experimental design (mild create) but mostly mastering methods
+      analyze: 9
+      concrete_abstract: 6
+      flexible_structured: 5  # rigorous lab protocols (structured env) but open scientific questions (flexible problem) → midpoint
+      nurturing: 6
+      solo_group: 4          # lab work is often solo or small team; fieldwork more collaborative
+      indoors_outdoors: 5    # split between lab (indoors) and field (outdoors)
+      inform_express: 2      # strongly inform — publishing findings, sharing knowledge
+      animals_people: 5      # spans both; depends on subdiscipline
+
+  - id: physical_sciences
+    name: "Physical Sciences"
+    description: >
+      This field explores the fundamental rules of the universe — matter, energy, space, and time.
+      Work is highly analytical and abstract, often involving complex mathematics and experimentation.
+      It suits people who love asking big questions and figuring out how things work at a deep level.
+    role_hint: "Research and laboratory roles in physics, chemistry, astronomy, and related physical sciences"
+    axes:
+      things_people: 2
+      master_create: 4       # theory-building has creative elements but mastery of existing frameworks dominates
+      analyze: 10
+      concrete_abstract: 8
+      flexible_structured: 5  # rigorous experimental method (structured env) but open-ended discovery questions (flexible problem) → midpoint
+      nurturing: 3
+      solo_group: 4          # often solo deep work with occasional team collaboration
+      indoors_outdoors: 1    # almost entirely indoors — labs, offices, observatories
+      inform_express: 2      # strongly inform — publishing, teaching, communicating findings
+      animals_people: 5      # not relevant; scored neutral
+
+  - id: earth_environmental_sciences
+    name: "Earth & Environmental Sciences"
+    description: >
+      This field studies the planet — its geology, atmosphere, oceans, and ecosystems.
+      Work combines fieldwork, data analysis, and an interest in protecting natural systems.
+      It suits people who care about the environment and enjoy working with both data and the physical world.
+    role_hint: "Field and research roles in geology, climate science, ecology, and environmental protection"
+    axes:
+      things_people: 2
+      master_create: 4       # methodical mastery of field techniques; some modelling creativity
+      analyze: 8
+      concrete_abstract: 5
+      flexible_structured: 5
+      nurturing: 6
+      solo_group: 4          # mix of solo fieldwork and research teams
+      indoors_outdoors: 7    # strong outdoors component — fieldwork is central
+      inform_express: 2      # inform — communicating scientific findings and environmental data
+      animals_people: 3      # more environment/ecosystem than direct animal care
+
+  - id: medical_health_sciences
+    name: "Medical & Health Sciences"
+    description: >
+      This field researches how the human body works and how disease can be prevented or treated.
+      It is deeply analytical and often involves laboratory research, clinical trials, and data.
+      It suits people who are curious about medicine and want to improve human health through science.
+    role_hint: "Research and laboratory roles in medical science, epidemiology, pharmacology, and public health"
+    axes:
+      things_people: 4
+      master_create: 4       # experimental design (some create) balanced with deep methodological mastery
+      analyze: 9
+      concrete_abstract: 6
+      flexible_structured: 6  # defined protocols and pre-registered endpoints (structured env) but research questions are genuinely open → slight midpoint lean
+      nurturing: 7
+      solo_group: 4          # lab research often solo; larger studies team-based
+      indoors_outdoors: 1    # almost exclusively indoors — labs and clinical settings
+      inform_express: 2      # strongly inform — scientific communication and knowledge transfer
+      animals_people: 7      # research often focuses on human health outcomes
+
+  - id: computer_science_ai
+    name: "Computer Science & AI"
+    description: >
+      This field studies how computers think, learn, and solve problems at a theoretical level.
+      Work involves algorithms, artificial intelligence, data, and building the ideas behind software.
+      It suits people who love abstract thinking, logic puzzles, and understanding how intelligent systems work.
+    role_hint: "Research and development roles in algorithms, artificial intelligence, machine learning, and data science"
+    axes:
+      things_people: 2
+      master_create: 6       # building new systems and algorithms (create-leaning) but deep mastery required
+      analyze: 9
+      concrete_abstract: 8
+      flexible_structured: 4  # highly exploratory problem space + field itself in constant upheaval; revisit if volatility trend continues
+      nurturing: 3
+      solo_group: 4          # often solo deep work; open-source and research teams also common
+      indoors_outdoors: 1    # almost exclusively indoors
+      inform_express: 3      # leans inform — documentation, papers, technical communication
+      animals_people: 5      # not relevant; scored neutral
+
+  - id: mathematics_statistics
+    name: "Mathematics & Statistics"
+    description: >
+      This field works with numbers, patterns, logic, and probability at a deep and abstract level.
+      Work involves solving complex theoretical problems and applying mathematical models to real-world questions.
+      It suits people who love the precision of numbers and enjoy working through difficult logical problems.
+    role_hint: "Roles in pure mathematics, applied mathematics, statistics, and quantitative analysis"
+    axes:
+      things_people: 2
+      master_create: 5       # pure maths has high creative invention; applied maths leans master — midpoint
+      analyze: 10
+      concrete_abstract: 9
+      flexible_structured: 7
+      nurturing: 2
+      solo_group: 2          # deeply solo discipline — individual thought is central
+      indoors_outdoors: 1    # exclusively indoors
+      inform_express: 2      # inform — proofs, papers, models communicated to others
+      animals_people: 5      # not relevant; scored neutral
+
+  - id: social_sciences
+    name: "Social Sciences"
+    description: >
+      This field studies people — how they think, behave, and organize themselves in societies.
+      Work involves research, observation, analysis, and often working directly with communities.
+      It suits people who are curious about human behavior and want to understand why people do what they do.
+    role_hint: "Research and applied roles in psychology, sociology, anthropology, economics, and political science"
+    axes:
+      things_people: 7
+      master_create: 4       # methodological mastery; some theoretical innovation
+      analyze: 8
+      concrete_abstract: 7
+      flexible_structured: 5
+      nurturing: 6
+      solo_group: 4          # mix — solo research and community/fieldwork
+      indoors_outdoors: 3    # mostly indoors; some fieldwork and community settings
+      inform_express: 3      # leans inform — research findings, policy recommendations
+      animals_people: 8      # people-focused by definition
+
+  # ── Engineering & Technology ─────────────────────────────────────────────────
+
+  - id: mechanical_industrial_engineering
+    name: "Mechanical & Industrial Engineering"
+    description: >
+      This field designs and builds machines, tools, and systems that make physical things work.
+      Work is hands-on and technical, often involving prototyping, testing, and problem-solving in real environments.
+      It suits people who like taking things apart, figuring out how they work, and building solutions.
+    role_hint: "Design and manufacturing roles in mechanical systems, industrial processes, robotics, and product engineering"
+    axes:
+      things_people: 2
+      master_create: 7       # designing new systems and solutions is central
+      analyze: 7
+      concrete_abstract: 3
+      flexible_structured: 7
+      nurturing: 3
+      solo_group: 5          # mix of individual design work and team-based projects
+      indoors_outdoors: 4    # mostly indoors; some site/factory floor work
+      inform_express: 3      # leans inform — technical documentation, specifications
+      animals_people: 5      # not relevant; scored neutral
+
+  - id: civil_structural_engineering
+    name: "Civil & Structural Engineering"
+    description: >
+      This field designs and builds the physical infrastructure of the world — roads, bridges, buildings, and water systems.
+      Work involves planning, calculation, and overseeing large construction projects.
+      It suits people who like seeing tangible results and want to build things that last.
+    role_hint: "Design and project roles in infrastructure, construction, structural analysis, and urban planning"
+    axes:
+      things_people: 3
+      master_create: 7       # designing new infrastructure and structures
+      analyze: 7
+      concrete_abstract: 4
+      flexible_structured: 7  # strong process regularity but project problems aren't epistemically closed
+      nurturing: 4
+      solo_group: 6          # project teams and site coordination are standard
+      indoors_outdoors: 6    # significant outdoor site work alongside office design work
+      inform_express: 3      # inform — reports, specifications, project documentation
+      animals_people: 5      # not relevant; scored neutral
+
+  - id: electrical_electronic_engineering
+    name: "Electrical & Electronic Engineering"
+    description: >
+      This field works with electricity, circuits, and electronic systems that power modern life.
+      Work ranges from designing microchips to building power grids and communication systems.
+      It suits people who are fascinated by how electricity and electronics make things work.
+    role_hint: "Design and technical roles in electronics, power systems, communications, and circuit engineering"
+    axes:
+      things_people: 2
+      master_create: 6       # circuit and system design is creative; deep technical mastery also required
+      analyze: 8
+      concrete_abstract: 5
+      flexible_structured: 7
+      nurturing: 3
+      solo_group: 4          # often solo design work; larger projects team-based
+      indoors_outdoors: 2    # predominantly indoors — labs, offices, facilities
+      inform_express: 3      # inform — technical documentation and specifications
+      animals_people: 5      # not relevant; scored neutral
+
+  - id: software_engineering
+    name: "Software Engineering"
+    description: >
+      This field builds the software and applications that run on computers, phones, and devices.
+      Work is practical and technical, focused on writing code, solving real problems, and shipping working products.
+      It suits people who enjoy logical thinking, building things, and seeing their work used by others.
+    role_hint: "Development and technical roles in software development, web engineering, mobile apps, and systems programming"
+    axes:
+      things_people: 3
+      master_create: 7       # building new products and features; create-leaning
+      analyze: 6
+      concrete_abstract: 5
+      flexible_structured: 5  # chaotic environment beneath sprint wrapper; field and stack constantly changing; problems open-ended
+      nurturing: 3
+      solo_group: 5          # mix — solo coding and team-based development
+      indoors_outdoors: 1    # almost exclusively indoors
+      inform_express: 3      # leans inform — documentation, code comments, technical writing
+      animals_people: 5      # not relevant; scored neutral
+
+  - id: aerospace_defense_engineering
+    name: "Aerospace & Defense Engineering"
+    description: >
+      This field designs aircraft, spacecraft, and defense systems that operate in extreme conditions.
+      Work is highly technical and analytical, requiring precision and a strong grasp of physics and materials.
+      It suits people who are fascinated by flight, space, and pushing the limits of what machines can do.
+    role_hint: "Engineering and research roles in aircraft design, spacecraft systems, propulsion, and defense technology"
+    axes:
+      things_people: 2
+      master_create: 7       # designing novel systems; strong creative and analytical blend
+      analyze: 8
+      concrete_abstract: 6
+      flexible_structured: 8
+      nurturing: 3
+      solo_group: 6          # large interdisciplinary teams are standard
+      indoors_outdoors: 3    # mostly indoors; some testing and launch site work
+      inform_express: 3      # inform — technical reports, safety documentation
+      animals_people: 5      # not relevant; scored neutral
+
+  - id: biomedical_engineering
+    name: "Biomedical Engineering"
+    description: >
+      This field applies engineering principles to medicine — designing prosthetics, medical devices, and diagnostic tools.
+      Work sits at the intersection of science, technology, and human health.
+      It suits people who want to build things that directly improve people's lives and wellbeing.
+    role_hint: "Design and research roles in medical devices, prosthetics, diagnostic equipment, and health technology"
+    axes:
+      things_people: 3
+      master_create: 7       # designing new devices and solutions is central
+      analyze: 8
+      concrete_abstract: 6
+      flexible_structured: 7
+      nurturing: 7
+      solo_group: 5          # mix of lab-based individual work and cross-functional teams
+      indoors_outdoors: 1    # almost exclusively indoors — labs and clinical environments
+      inform_express: 3      # inform — research papers, device documentation
+      animals_people: 7      # work ultimately serves human health outcomes
+
+  # ── Medicine & Care ──────────────────────────────────────────────────────────
+
+  - id: clinical_medicine
+    name: "Clinical Medicine"
+    description: >
+      This field diagnoses and treats illness and injury in real patients.
+      Work is highly analytical and people-facing, requiring both deep knowledge and strong interpersonal skills.
+      It suits people who want to help others and are willing to commit to years of rigorous training.
+    role_hint: "Patient-facing roles in medicine including doctors, surgeons, specialists, and clinical practitioners"
+    axes:
+      things_people: 7
+      master_create: 2       # deeply master-oriented — years of training to perfect existing protocols
+      analyze: 8
+      concrete_abstract: 4
+      flexible_structured: 8  # highly protocol-driven environment + diagnosis targets a correct answer → strongly structured on both dimensions
+      nurturing: 9
+      solo_group: 5          # mix of individual patient consultations and clinical teams
+      indoors_outdoors: 1    # almost exclusively indoors — clinics, hospitals, surgeries
+      inform_express: 3      # inform — explaining diagnoses, patient education
+      animals_people: 9      # overwhelmingly people-facing
+
+  - id: nursing_allied_health
+    name: "Nursing & Allied Health"
+    description: >
+      This field provides direct care and support to patients across a wide range of health settings.
+      Work is highly relational and practical, focused on day-to-day patient wellbeing and recovery.
+      It suits people who are caring, calm under pressure, and want to make a tangible difference in people's lives.
+    role_hint: "Care and support roles including nursing, physiotherapy, occupational therapy, and radiography"
+    axes:
+      things_people: 8
+      master_create: 2       # strong mastery orientation — protocols, procedures, clinical skills
+      analyze: 6
+      concrete_abstract: 3
+      flexible_structured: 8  # even more protocol-bound than clinical medicine; shift structure adds further regularity
+      nurturing: 9
+      solo_group: 6          # ward and clinic environments are inherently team-based
+      indoors_outdoors: 1    # almost exclusively indoors
+      inform_express: 3      # inform — patient communication, care instructions
+      animals_people: 9      # direct people care
+
+  - id: mental_health_counseling
+    name: "Mental Health & Counseling"
+    description: >
+      This field supports people through emotional, psychological, and mental health challenges.
+      Work is deeply relational and requires empathy, patience, and strong listening skills.
+      It suits people who genuinely care about others and want to help them through difficult times.
+    role_hint: "Therapeutic and support roles including psychologists, counselors, therapists, and mental health social workers"
+    axes:
+      things_people: 9
+      master_create: 4       # therapeutic approaches require mastery; some creative adaptation
+      analyze: 7
+      concrete_abstract: 6
+      flexible_structured: 4  # highly adaptive, open-ended therapeutic work; no correct answer; structured modalities (CBT, DBT) exist but problem space resists closure
+      nurturing: 10
+      solo_group: 3          # typically one-on-one or small group; solo practice common
+      indoors_outdoors: 1    # almost exclusively indoors — clinics, private practices
+      inform_express: 4      # leans inform but with expressive/empathetic communication
+      animals_people: 9      # entirely people-focused
+
+  - id: veterinary_animal_care
+    name: "Veterinary & Animal Care"
+    description: >
+      This field provides medical care, support, and welfare to animals of all kinds.
+      Work combines scientific knowledge with hands-on care and a love of animals.
+      It suits people who feel strongly about animal welfare and enjoy working with living creatures.
+    role_hint: "Care and medical roles including veterinarians, veterinary nurses, animal behaviourists, and wildlife rehabilitators"
+    axes:
+      things_people: 4
+      master_create: 2       # mastery-oriented — clinical skills, protocols, animal handling
+      analyze: 7
+      concrete_abstract: 3
+      flexible_structured: 7  # clinical protocols, appointment structures, defined treatment pathways → closer to clinical medicine than research
+      nurturing: 9
+      solo_group: 4          # mix of solo consultations and clinic teams
+      indoors_outdoors: 5    # split between clinic (indoors) and field/wildlife work (outdoors)
+      inform_express: 3      # inform — owner communication, case notes
+      animals_people: 1      # strongly animal-focused
+
+  # ── Arts & Design ────────────────────────────────────────────────────────────
+
+  - id: visual_arts_illustration
+    name: "Visual Arts & Illustration"
+    description: >
+      This field creates visual work — paintings, drawings, illustrations, and fine art.
+      Work is highly creative and personal, driven by self-expression and a strong visual imagination.
+      It suits people who see the world differently and feel compelled to express what they see.
+    role_hint: "Creative roles in fine art, illustration, concept art, animation, and visual storytelling"
+    axes:
+      things_people: 4
+      master_create: 9       # among the most strongly create-oriented categories
+      analyze: 3
+      concrete_abstract: 5
+      flexible_structured: 3
+      nurturing: 3
+      solo_group: 2          # predominantly solo practice
+      indoors_outdoors: 2    # predominantly indoors — studios
+      inform_express: 9      # strongly express — personal vision and emotion are the point
+      animals_people: 5      # not relevant; scored neutral
+
+  - id: design_architecture
+    name: "Design & Architecture"
+    description: >
+      This field creates things that are both functional and beautiful — buildings, products, interfaces, and spaces.
+      Work balances creativity with technical constraints and user needs.
+      It suits people who enjoy making things look and work well, and who think carefully about how people experience the world.
+    role_hint: "Design and creative roles in architecture, interior design, product design, UX design, and industrial design"
+    axes:
+      things_people: 4
+      master_create: 8       # strongly create-oriented with functional constraints
+      analyze: 5
+      concrete_abstract: 5
+      flexible_structured: 5  # process regularity (planning phases, client milestones, regulatory submissions) balances open creative problem space
+      nurturing: 4
+      solo_group: 5          # mix — solo creative work and client/team collaboration
+      indoors_outdoors: 2    # predominantly indoors; some site visits
+      inform_express: 7      # leans express — personal aesthetic and vision are central
+      animals_people: 5      # not relevant; scored neutral
+
+  - id: music_performing_arts
+    name: "Music & Performing Arts"
+    description: >
+      This field performs, composes, and creates live experiences through music, theatre, and dance.
+      Work is expressive and often collaborative, requiring discipline, creativity, and a love of performance.
+      It suits people who feel most alive when creating or performing for others.
+    role_hint: "Performance and creative roles in music, theatre, dance, opera, and live performance"
+    axes:
+      things_people: 6
+      master_create: 7       # composition and performance both require mastery; create-leaning overall
+      analyze: 4
+      concrete_abstract: 5
+      flexible_structured: 3
+      nurturing: 5
+      solo_group: 6          # ensemble, band, and theatre work is collaborative; soloists exist
+      indoors_outdoors: 3    # mostly indoors; outdoor festivals and performances also common
+      inform_express: 9      # strongly express — performance is personal emotional expression
+      animals_people: 8      # people-facing — performs for and with people
+
+  - id: film_media_production
+    name: "Film & Media Production"
+    description: >
+      This field creates films, television, podcasts, and digital content for audiences.
+      Work is collaborative and creative, combining storytelling with technical production skills.
+      It suits people who love stories and want to bring them to life through sound and image.
+    role_hint: "Production and creative roles in filmmaking, television, documentary, podcasting, and digital media"
+    axes:
+      things_people: 5
+      master_create: 8       # strongly create-oriented; storytelling and production are generative
+      analyze: 5
+      concrete_abstract: 5
+      flexible_structured: 4
+      nurturing: 4
+      solo_group: 8          # film and media production is inherently team-based
+      indoors_outdoors: 4    # mix — studio work (indoors) and location shoots (outdoors)
+      inform_express: 7      # leans express — storytelling, personal voice, artistic vision
+      animals_people: 7      # people-facing — working with crews, talent, and audiences
+
+  - id: writing_journalism
+    name: "Writing & Journalism"
+    description: >
+      This field communicates ideas, stories, and information through the written word.
+      Work requires both creativity and analytical thinking — finding the story and telling it clearly.
+      It suits people who love language, are curious about the world, and want to inform or move their readers.
+    role_hint: "Writing and editorial roles in journalism, authorship, copywriting, screenwriting, and content creation"
+    axes:
+      things_people: 5
+      master_create: 7       # creating original content and narrative is central
+      analyze: 6
+      concrete_abstract: 7
+      flexible_structured: 4
+      nurturing: 5
+      solo_group: 2          # predominantly solo — writing is largely an individual act
+      indoors_outdoors: 2    # predominantly indoors; some field reporting
+      inform_express: 5      # sits at midpoint — fiction/essays lean express; journalism leans inform
+      animals_people: 7      # subject matter often people-focused; varies by beat
+
+  # ── Business & Law ───────────────────────────────────────────────────────────
+
+  - id: business_entrepreneurship
+    name: "Business & Entrepreneurship"
+    description: >
+      This field builds, runs, and grows organizations and ventures.
+      Work involves strategy, creativity, people management, and a tolerance for uncertainty.
+      It suits people who like making things happen, taking initiative, and turning ideas into reality.
+    role_hint: "Leadership and strategy roles including entrepreneurs, business owners, product managers, and startup founders"
+    axes:
+      things_people: 6
+      master_create: 7       # building new ventures and solutions is core
+      analyze: 6
+      concrete_abstract: 5
+      flexible_structured: 3  # highly irregular environment; tolerance for uncertainty is core to the category description
+      nurturing: 4
+      solo_group: 7          # leadership and team-building are central; solo founders also exist
+      indoors_outdoors: 2    # predominantly indoors
+      inform_express: 6      # mix — pitching and vision (express) and reporting/analysis (inform)
+      animals_people: 8      # people-facing — managing teams and serving customers
+
+  - id: finance_accounting
+    name: "Finance & Accounting"
+    description: >
+      This field manages, analyzes, and reports on money — for individuals, businesses, and institutions.
+      Work is highly structured and analytical, requiring precision and attention to detail.
+      It suits people who like working with numbers, following clear rules, and maintaining order.
+    role_hint: "Analytical and advisory roles in accounting, financial analysis, investment, auditing, and corporate finance"
+    axes:
+      things_people: 3
+      master_create: 2       # strongly master-oriented — rules, standards, established methods
+      analyze: 8
+      concrete_abstract: 6
+      flexible_structured: 9  # archetype of both dimensions — calendar-driven closes and filing cycles; problems have verifiable correct answers
+      nurturing: 2
+      solo_group: 2          # predominantly solo — individual close, reconciliation, and filing work
+      indoors_outdoors: 1    # exclusively indoors
+      inform_express: 2      # strongly inform — reports, audits, financial statements
+      animals_people: 5      # not relevant; conditional axis does not trigger for this profile
+
+  - id: law_policy
+    name: "Law & Policy"
+    description: >
+      This field interprets rules, argues cases, and shapes the systems that govern society.
+      Work is analytical and language-driven, requiring sharp reasoning and persuasive communication.
+      It suits people who enjoy debate, care about fairness, and like working through complex problems.
+    role_hint: "Legal and policy roles including lawyers, judges, policy analysts, public defenders, and legislators"
+    axes:
+      things_people: 6
+      master_create: 3       # mastery of law and precedent is dominant; some creative argumentation
+      analyze: 9
+      concrete_abstract: 7
+      flexible_structured: 7  # realistic daily distribution of legal work is heavily procedural and form-driven; interpretive work is real but a minority
+      nurturing: 6
+      solo_group: 5          # mix — solo research and drafting, courtroom and team collaboration
+      indoors_outdoors: 1    # almost exclusively indoors
+      inform_express: 5      # midpoint — informing through argument; advocacy has expressive elements
+      animals_people: 8      # people-facing — clients, courts, communities
+
+  # ── Education & Community ────────────────────────────────────────────────────
+
+  - id: education_teaching
+    name: "Education & Teaching"
+    description: >
+      This field helps people learn — in classrooms, online, and in communities.
+      Work is highly relational and requires patience, communication, and a genuine love of sharing knowledge.
+      It suits people who find satisfaction in helping others grow and understand the world.
+    role_hint: "Teaching and instructional roles including teachers, lecturers, tutors, curriculum designers, and educational coaches"
+    axes:
+      things_people: 9
+      master_create: 5       # lesson creation (mild create) balanced with mastery of subject matter
+      analyze: 5
+      concrete_abstract: 5
+      flexible_structured: 7  # term structures, timetables, curriculum frameworks, and standardised assessments — creativity exists within the structure but cannot opt out of it
+      nurturing: 8
+      solo_group: 7          # classroom and institutional settings are group-oriented
+      indoors_outdoors: 2    # predominantly indoors — classrooms, lecture halls
+      inform_express: 2      # strongly inform — knowledge transfer is the primary function
+      animals_people: 9      # entirely people-facing
+
+  - id: social_work_community
+    name: "Social Work & Community Services"
+    description: >
+      This field supports people who are vulnerable, disadvantaged, or in crisis.
+      Work is relational, emotionally demanding, and deeply purposeful.
+      It suits people who feel a strong calling to help others and want to make a difference in their communities.
+    role_hint: "Support and advocacy roles including social workers, community organizers, case managers, and charity workers"
+    axes:
+      things_people: 9
+      master_create: 4       # some case creativity; predominantly mastery of support frameworks
+      analyze: 5
+      concrete_abstract: 4
+      flexible_structured: 4  # administrative wrapper (case reviews, court dates) is cosmetic; actual human problems are unpredictable and open-ended
+      nurturing: 10
+      solo_group: 6          # community work involves group coordination; casework can be solo
+      indoors_outdoors: 3    # mostly indoors; some community outreach outdoors
+      inform_express: 3      # leans inform — advocacy, case documentation, community communication
+      animals_people: 9      # entirely people-focused
+
+  # ── Trades & Practical Skills ────────────────────────────────────────────────
+
+  - id: skilled_trades_craftsmanship
+    name: "Skilled Trades & Craftsmanship"
+    description: >
+      This field builds, repairs, and crafts physical things using tools, materials, and hands-on skill.
+      Work is practical and tangible, with clear results you can see and touch.
+      It suits people who like working with their hands, solving practical problems, and making things that last.
+    role_hint: "Practical and hands-on roles including carpenters, electricians, chefs, plumbers, mechanics, and craftspeople"
+    axes:
+      things_people: 2
+      master_create: 6       # craftsmanship involves both making new things and perfecting technique
+      analyze: 4
+      concrete_abstract: 2
+      flexible_structured: 6
+      nurturing: 3
+      solo_group: 3          # trades often solo or small crew; some site team coordination
+      indoors_outdoors: 5    # highly variable — electricians indoors, landscapers outdoors, builders both
+      inform_express: 4      # mild express in craft/design; mostly neutral
+      animals_people: 5      # not relevant; scored neutral
+
+  # ── Nature & Environment ─────────────────────────────────────────────────────
+
+  - id: ecology_conservation
+    name: "Ecology & Conservation"
+    description: >
+      This field studies and protects natural ecosystems — from forests and wetlands to oceans and wildlife habitats.
+      Work is mostly outdoors, combining scientific observation with a deep commitment to the natural world.
+      It suits people who feel strongly about nature and want to spend their working life in it, not studying it from a desk.
+    role_hint: "Field and conservation roles including ecologists, wildlife surveyors, conservation officers, park rangers, and environmental consultants"
+    axes:
+      things_people: 2
+      master_create: 4       # methodical fieldwork and monitoring; some survey design creativity
+      analyze: 7             # data collection, species monitoring, and environmental assessment are central
+      concrete_abstract: 4  # mostly concrete fieldwork; some modelling and reporting
+      flexible_structured: 4  # fieldwork is irregular by nature — seasons, weather, and species behaviour dictate the schedule; problems are open-ended
+      nurturing: 5      # motivated by environment, not individual care — scored neutral to separate from veterinary
+      solo_group: 4          # often solo or small team fieldwork
+      indoors_outdoors: 8    # strongly outdoors — fieldwork is the core of the role
+      inform_express: 2      # inform — field reports, conservation documentation, scientific communication
+      animals_people: 4      # ecosystem-level focus; leans animals/nature over people but not direct animal care
+
+  # ── Craft & Making ───────────────────────────────────────────────────────────
+
+  - id: craft_arts
+    name: "Craft Arts & Making"
+    description: >
+      This field creates handmade objects where the making process itself is central — pottery, glassblowing, jewellery, textiles, furniture, and other craft disciplines.
+      Work is deeply hands-on and expressive, combining technical skill with personal artistic vision.
+      It suits people who find satisfaction in making beautiful, functional things with their hands.
+    role_hint: "Craft and maker roles including potters, glassblowers, jewellery makers, textile artists, furniture makers, and bookbinders"
+    axes:
+      things_people: 3
+      master_create: 8       # strongly create-leaning; making new things is the point — but mastering craft technique also matters
+      analyze: 3
+      concrete_abstract: 2   # strongly concrete — physical materials and hands-on process are central
+      flexible_structured: 4
+      nurturing: 3
+      solo_group: 2          # predominantly solo studio practice
+      indoors_outdoors: 3    # mostly indoors — studios and workshops
+      inform_express: 7      # strongly expressive — personal aesthetic and vision are central, more than communication
+      animals_people: 5      # not relevant; scored neutral
+
+  # ── Data & Analysis ──────────────────────────────────────────────────────────
+
+  - id: data_analytics
+    name: "Data & Analytics"
+    description: >
+      This field turns raw data into insight — finding patterns, building models, and helping organisations make better decisions.
+      Work is highly structured and analytical, involving statistics, visualisation, and careful interpretation of numbers.
+      It suits people who enjoy working with data, spotting trends, and communicating what the numbers actually mean.
+    role_hint: "Analytical roles including data analysts, business intelligence analysts, actuaries, statisticians, and market researchers"
+    axes:
+      things_people: 2
+      master_create: 2       # strongly master-oriented — applying established analytical methods with precision
+      analyze: 9             # analytical drive is the defining trait of this field
+      concrete_abstract: 7   # conceptual and symbolic work; data is abstract even when outputs are concrete
+      flexible_structured: 6 # some repeatable reporting cycles but work is exploratory and fast-moving; problem space is open-ended
+      nurturing: 2
+      solo_group: 4          # mix of solo analysis and team reporting
+      indoors_outdoors: 1    # exclusively indoors
+      inform_express: 2      # strongly inform — communicating findings clearly is the primary output mode
+      animals_people: 5      # not relevant; conditional axis does not trigger for this profile
+
+  # ── People & Influence ───────────────────────────────────────────────────────
+
+  - id: people_influence
+    name: "People & Influence"
+    description: >
+      This field works through relationships, persuasion, and communication to achieve goals — in sales, marketing, public relations, recruitment, and people operations.
+      Work is highly social and team-oriented, requiring energy, emotional intelligence, and the ability to connect with a wide range of people.
+      It suits people who are energised by human interaction and enjoy the challenge of bringing others around to an idea or opportunity.
+    role_hint: "Relationship and influence roles including sales managers, marketing strategists, recruiters, PR specialists, and account managers"
+    axes:
+      things_people: 9       # strongly people-oriented — relationships are the medium of the work
+      master_create: 4       # some creative campaign and pitch work; mostly applying proven frameworks
+      analyze: 4
+      concrete_abstract: 5
+      flexible_structured: 4  # sales and marketing cycles add some regularity but campaigns pivot constantly; client relationships and problem space are unpredictable
+      nurturing: 4      # relationship-driven not nurturing-driven — key separation from education and social work
+      solo_group: 8          # strongly group-oriented — team environments, client relationships, collaborative campaigns
+      indoors_outdoors: 2    # predominantly indoors
+      inform_express: 6      # mix — pitching and storytelling (express) and reporting and briefing (inform)
+      animals_people: 7      # strongly people-facing
+
+  # ── Outdoor & Adventure Services ─────────────────────────────────────────────
+
+  - id: outdoor_adventure_services
+    name: "Outdoor & Adventure Services"
+    description: >
+      This field delivers experiences, education, and support in outdoor environments — from guiding expeditions to running outdoor therapy programmes.
+      Work combines a love of the outdoors with a people-facing service role, often in physically demanding settings.
+      It suits people who want to spend their working life outside and find purpose in sharing that environment with others.
+    role_hint: "Outdoor and experiential roles including expedition guides, outdoor education instructors, park rangers, surf coaches, and wilderness therapists"
+    axes:
+      things_people: 6       # people-facing service role but in a physical/environmental context
+      master_create: 4       # programme design has some creative elements; mostly delivery-focused
+      analyze: 3
+      concrete_abstract: 2   # strongly concrete — physical environments, practical skills, real-world activity
+      flexible_structured: 4 # tends toward flexibility — conditions change, programmes adapt
+      nurturing: 6      # service orientation present but not the dominant driver
+      solo_group: 6          # group leadership and facilitation are central
+      indoors_outdoors: 9    # among the most strongly outdoors categories
+      inform_express: 4      # mix — instructional communication (inform) with motivational/experiential elements
+      animals_people: 6      # people-facing but often in nature/wildlife contexts; scored people-leaning

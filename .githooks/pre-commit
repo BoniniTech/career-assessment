@@ -1,0 +1,35 @@
+#!/bin/bash
+# Validates YAML files and recomputes axis priorities when live/*.yaml files are staged.
+
+STAGED=$(git diff --cached --name-only)
+
+if echo "$STAGED" | grep -qE '^live/(categories|dimensions)\.yaml$'; then
+    echo "Validating YAML..."
+    python scripts/validate_yaml.py dimensions
+    if [ $? -ne 0 ]; then
+        echo "validate_yaml.py dimensions failed -- commit aborted."
+        exit 1
+    fi
+    python scripts/validate_yaml.py categories
+    if [ $? -ne 0 ]; then
+        echo "validate_yaml.py categories failed -- commit aborted."
+        exit 1
+    fi
+
+    echo "Recomputing axis priorities..."
+    python scripts/recalc.py
+    if [ $? -ne 0 ]; then
+        echo "recalc.py failed -- commit aborted."
+        exit 1
+    fi
+    git add live/dimensions.yaml
+fi
+
+if echo "$STAGED" | grep -qE '^analytics/archetypes\.yaml$'; then
+    echo "Validating archetypes..."
+    python scripts/validate_yaml.py archetypes
+    if [ $? -ne 0 ]; then
+        echo "validate_yaml.py archetypes failed -- commit aborted."
+        exit 1
+    fi
+fi
