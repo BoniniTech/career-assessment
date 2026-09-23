@@ -78,8 +78,9 @@ For conditional axes, also add an `activation:` block:
 
 ---
 
-## Step 3 — Re-score all categories in `categories.yaml`
+## Step 3 — Re-score all categories and seed archetypes
 
+**3a — Re-score categories in `categories.yaml`**
 Every category must receive a score for the new axis. Do not leave any category without a score — missing scores cause silent matching errors.
 
 **Scoring guidance**
@@ -94,6 +95,11 @@ Every category must receive a score for the new axis. Do not leave any category 
 ```
 
 **Validate:** confirm every category has the new axis scored before continuing.
+
+**3b — Seed archetypes in `analytics/archetypes.yaml`**
+Add a seed for the new axis to every archetype. `scripts/analytics.py` exits at startup if any archetype is missing one. Follow the seeding guidance in [`analytics-internals.md`](analytics-internals.md#archetype-design-principles): neutral 5 where the axis doesn't define the archetype, a persona-driven value where it does. Stage `archetypes.yaml` in the same commit as `dimensions.yaml`, since the pre-commit hook validates archetypes against the axes whenever either file is staged.
+
+**Validate:** `python scripts/validate_yaml.py archetypes`, then `python scripts/analytics.py run 100` and check the per-archetype top categories still look right.
 
 ---
 
@@ -170,7 +176,8 @@ If test sessions surface any ambiguity, question design problems, or unexpected 
 |---|---|---|
 | 1 | Full axis definition written and checklist confirmed | [ ] |
 | 2 | Entry added to `dimensions.yaml` and validated | [ ] |
-| 3 | All categories re-scored in `categories.yaml` | [ ] |
+| 3a | All categories re-scored in `categories.yaml` | [ ] |
+| 3b | Every archetype seeded in `analytics/archetypes.yaml`, analytics run checked | [ ] |
 | 4a | Axis priority sequence updated in career-assessment skill | [ ] |
 | 4b | Budget and special rules updated (if needed) | [ ] |
 | 4c | Example question added | [ ] |

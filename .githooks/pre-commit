@@ -25,7 +25,8 @@ if echo "$STAGED" | grep -qE '^live/(categories|dimensions)\.yaml$'; then
     git add live/dimensions.yaml
 fi
 
-if echo "$STAGED" | grep -qE '^analytics/archetypes\.yaml$'; then
+# Archetypes need a seed for every axis, so a dimensions change can break them too.
+if echo "$STAGED" | grep -qE '^(analytics/archetypes|live/dimensions)\.yaml$'; then
     echo "Validating archetypes..."
     python scripts/validate_yaml.py archetypes
     if [ $? -ne 0 ]; then
