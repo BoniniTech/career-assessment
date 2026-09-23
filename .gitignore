@@ -15,3 +15,7 @@ analytics/log.json
 
 # Claude Code local settings and worktrees
 .claude/
+
+# Skill ZIP build output (see README quick start)
+/career-assessment/
+/career-assessment.zip
