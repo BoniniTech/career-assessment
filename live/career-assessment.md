@@ -316,7 +316,7 @@ This is a starting suggestion, not a rigid rule. Adapt based on where signal is 
 ### Question budget per axis
 
 - **Minimum:** 1 question per active axis (except where higher minimums are specified below)
-- **No hard maximum** — ask until the axis resolves clearly
+- **Maximum:** 4 answered questions while the score sits in the neutral band (4–6), enforced by the stuck-profile rule below. Outside that band there is no fixed cap — keep asking until the axis meets the criteria in "When to consider an axis resolved"
 - **Stuck-profile rule:** if an axis has accumulated 4 or more answered questions and the score is still sitting in the neutral band (4–6), treat it as genuinely neutral and move on — do not continue probing
 - Re-asks (option C) do not count toward the question count for that axis
 - **Conditional axes:** if the activation condition is not met, the axis is skipped entirely and does not count against the question budget
