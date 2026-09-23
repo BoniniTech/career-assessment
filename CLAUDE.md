@@ -35,10 +35,11 @@ Each skill lives in `skills/<skill-name>/SKILL.md`. Triggers are exact — Claud
 
 Both hooks fire whenever `live/categories.yaml` or `live/dimensions.yaml` is staged. They are configured via `core.hooksPath = .githooks`. Run `git config core.hooksPath .githooks` after a fresh clone to activate them.
 
-**YAML validation** — `scripts/validate_yaml.py` checks structural integrity of both YAML files before anything is committed. Run manually:
+**YAML validation** — `scripts/validate_yaml.py` checks structural integrity of the YAML files before anything is committed. Run manually:
 ```
 python scripts/validate_yaml.py dimensions
 python scripts/validate_yaml.py categories
+python scripts/validate_yaml.py archetypes  # also runs when live/dimensions.yaml is staged
 ```
 
 **Axis priority recompute** — `scripts/recalc.py` recomputes axis priorities and re-stages `live/dimensions.yaml` with updated `priority` fields. Run manually:
