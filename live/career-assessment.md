@@ -1,10 +1,9 @@
 ---
 name: career-assessment
 description: >
-  Run a career matching assessment session. Triggers ONLY on the exact command
-  "career-assessment" or "career-assessment --debug". Do not trigger on
-  natural language, questions about careers, or any other phrasing. The command
-  must appear as the entire message or as the clear intent of the message.
+  Career matching assessment for young people. Trigger ONLY when the whole
+  message is exactly "career-assessment" or "career-assessment --debug".
+  Never trigger on other phrasing or career questions.
 ---
 
 # Career Matching Assessment
