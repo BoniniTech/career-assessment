@@ -18,13 +18,14 @@ You need three files from `live/`:
 
 ### 1. Get the files
 
-On GitHub, click **Code → Download ZIP**. All three files are in the `live` folder inside it:
+On this repo's GitHub page, click the green **Code** button, then **Download ZIP**. All three files are in the `live` folder inside it:
 
 | OS | Where the files are |
 |---|---|
 | Windows | Open the ZIP in File Explorer: `~\Downloads\career-assessment-main.zip\career-assessment-main\live\` |
 | macOS | Double-click the ZIP to unzip it: `~/Downloads/career-assessment-main/live/` |
-| Cloned repo | `live/` |
+
+If you use git, you can clone the repo instead. The files are in `live/`, and in step 3 you run the command from the repo root.
 
 Take all three files from the same download: the skill and the two YAML files are updated together, and mixing versions can give wrong matches.
 
@@ -38,13 +39,12 @@ Take all three files from the same download: the skill and the two YAML files ar
 
 ### 3. Add the skill
 
-claude.ai only accepts skills as a ZIP containing a folder named after the skill, with the instructions in a file called `SKILL.md`. Build it from the folder that contains `live`:
+claude.ai only accepts skills as a ZIP containing a folder named after the skill, with the instructions in a file called `SKILL.md`. To build it, open a terminal (PowerShell on Windows, Terminal on macOS) and go to the folder that contains `live`:
 
 | OS | Folder to run the command in |
 |---|---|
 | Windows | Right-click the ZIP → **Extract All** (keep the default destination), then `cd ~\Downloads\career-assessment-main\career-assessment-main` |
 | macOS | `cd ~/Downloads/career-assessment-main` |
-| Cloned repo | The repo root |
 
 The command leaves `career-assessment.zip` in that folder.
 
